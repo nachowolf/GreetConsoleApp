@@ -17,13 +17,13 @@ public class GreetConsoleTest {
     @Test
     public void shouldGreetUserInJapanese(){
         GreetConsole greetUser = new GreetConsole();
-        assertEquals("Konichiwa, Nathri",greetUser.greet("Nathri", Language.Japanese));
+        assertEquals("Konichiwa, Nathri",greetUser.greet("Nathri Japanese"));
     }
 
     @Test
     public void shouldGreetUserInThai(){
         GreetConsole greetUser = new GreetConsole();
-        assertEquals("Sawa dee krahp, Nathri",greetUser.greet("Nathri", Language.Thai));
+        assertEquals("Sawa dee krahp, Nathri",greetUser.greet("Nathri Thai"));
     }
 
     @Test
@@ -42,16 +42,16 @@ public class GreetConsoleTest {
     }
 
     @Test
+    public void shouldShowHowManyTimesUsersHasBeenGreeted(){
+        GreetConsole greetUser = new GreetConsole();
+        greetUser.greet("Nathri", Language.Thai);
+        greetUser.greet("Nathri", Language.Thai);
+        assertEquals(Arrays.asList("user: James, greeted: 1", "user: Nathri, greeted: 2"), greetUser.greeted("Nathri"));
+    }
+
+    @Test
     public void shouldShowHowManyTimesASpecificUserHasBeenGreeted(){
         GreetConsole greetUser = new GreetConsole();
-        greetUser.greet("Nathri", Language.Thai);
-        greetUser.greet("Nathri", Language.Thai);
-        assertEquals(Arrays.asList("user: Nathri, greeted: 2"), greetUser.greeted("Nathri"));
-    }
-
-    @Test
-    public void shouldReturnHowManyUsersHasBennGreeted(){
-        GreetConsole greetUser = new GreetConsole();
         greetUser.greet("Nathri");
         greetUser.greet("John");
         greetUser.greet("Thomas");
@@ -61,29 +61,29 @@ public class GreetConsoleTest {
     }
 
     @Test
-    public void shouldClearAllUsers(){
+    public void shouldReturnHowManyUsersHasBeenGreeted(){
         GreetConsole greetUser = new GreetConsole();
         greetUser.greet("Nathri");
         greetUser.greet("John");
         greetUser.greet("Thomas");
         greetUser.greet("Sandra");
         greetUser.greet("Juniper");
-        assertEquals(Arrays.asList(5), greetUser.counter());
+        assertEquals(5, greetUser.counter());
         greetUser.clear();
-        assertEquals(Arrays.asList(0), greetUser.counter());
+        assertEquals(0, greetUser.counter());
     }
 
     @Test
-    public void shouldClearOneGreetedUsers(){
+    public void shouldClearAllGreetedUsers(){
         GreetConsole greetUser = new GreetConsole();
         greetUser.greet("Nathri");
         greetUser.greet("John");
         greetUser.greet("Thomas");
         greetUser.greet("Sandra");
         greetUser.greet("Juniper");
-        assertEquals(Arrays.asList(5), greetUser.counter());
+        assertEquals(5, greetUser.counter());
         greetUser.clear("Nathri");
-        assertEquals(Arrays.asList(4), greetUser.counter());
+        assertEquals(4, greetUser.counter());
     }
 
     @Test

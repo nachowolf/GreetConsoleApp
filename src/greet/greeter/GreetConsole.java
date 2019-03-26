@@ -3,11 +3,13 @@ package greet.greeter;
 
 import greet.user.User;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class GreetConsole implements GreetUser {
 
-
+List users = new ArrayList();
 
 
     @Override
@@ -16,7 +18,8 @@ public class GreetConsole implements GreetUser {
         String user;
         String[] data = input.split(" ");
 //        System.out.println;
-        User createUser = new User(data[0]);
+        User createUser = new User(data[0].toString());
+        users.add(createUser);
         user = data[0];
         System.out.println(user);
         return "Hello, " + user;
@@ -33,7 +36,15 @@ public class GreetConsole implements GreetUser {
 
     }
 
-    public static void main (String args []){
+    @Override
+    public String help() {
+        Arrays.asList(GreetCommands.values()).forEach(command ->
+                System.out.println(command));
+        String commands = GreetCommands.values().toString();
+return commands;
+    }
 
+    public static void main (String args []){
+//     help();
     }
 }
